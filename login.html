@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>APARTRACK</title>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="dist/css/bootstrap-material-design.css" rel="stylesheet">
+        <link href="dist/css/ripples.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                        <!--span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span-->
+                    </button>
+                    <a class="navbar-brand" href="index.html">APARTRACK</a>
+                </div>
+                <div class="navbar-collapse collapse navbar-responsive-collapse">
+                </div>
+            </div>
+        </div>
+        <div id="preloader">
+            <div id="status">
+                <div class="preloader-logo"></div>
+                <h3></h3>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 ">
+                    <div class="well" style="margin-top: 10px; padding: 0;">
+                        <form>
+                            <!--div class="visible-xs text-center" style="color: black">
+                                col xs
+                            </div>
+                            <div class="visible-sm text-center" style="color: black">
+                                col sm
+                            </div>
+                            <div class="visible-md text-center" style="color: black">
+                                col md
+                            </div>
+                            <div class="visible-lg text-center" style="color: black">
+                                col lg
+                            </div-->
+                            <!--div  style="font-size: 12px; color: #009688; text-align: center" tabindex="5" class="forgot-password">
+                                ¿Estas Registrado?
+                            </div-->
+                            <div class="form-group label-floating">
+                                <label style="color: #009688;" for="user" class="control-label" >Usuario</label>
+                                <input type="text" id="user" class="form-control">
+                                <span class="help-block has-error">Este campo es obilgatorio</span>
+                            </div>
+                            <div class="form-group label-floating">
+                                <label style="color: #009688;" for="password" class="control-label">Password</label>
+                                <input type="password" id="password" class="form-control">
+                                <span class="help-block has-error">Este campo es obilgatorio</span>
+                            </div>
+                            <div class="form-group" style="text-align: center; margin-top: 15px;">
+                                <a href="olvido.html"  style="font-size: 12px;" tabindex="5" class="forgot-password">¿Olvidaste tu Password?</a>
+                            </div>
+                            <div id="fountainG" style="display: none; margin-bottom: 25px;">
+                                <div id="fountainG_1" class="fountainG"></div>
+                                <div id="fountainG_2" class="fountainG"></div>
+                                <div id="fountainG_3" class="fountainG"></div>
+                                <div id="fountainG_4" class="fountainG"></div>
+                                <div id="fountainG_5" class="fountainG"></div>
+                                <div id="fountainG_6" class="fountainG"></div>
+                                <div id="fountainG_7" class="fountainG"></div>
+                                <div id="fountainG_8" class="fountainG"></div>
+                            </div>
+                            <div id="error" class="alert alert-danger text-center" style="display: none; margin-bottom: 0px; margin-top: 5px; font-size: 10px; ">
+                                <strong>USUARIO NO ENCONTRADO</strong>
+                            </div>
+                            <div class="form-group"  style="text-align: center; margin-top: 15px;">
+                                <button type="button" id="buttonIngresar" class="btn btn-raised btn-primary btn-block">INGRESAR</button>
+                                <span class="or" >or</span>
+                                <button type="button" id="buttonRegistrarse" class="btn btn-raised btn-primary btn-block">REGISTRARSE</button>
+                                <button type="button" id="buttonRedes" class="btn btn-raised btn-primary btn-block">INGRESA CON TUS REDES SOCIALES</button>
+                                <button type="button" id="buttonRegresar" class="btn btn-raised btn-primary btn-block">REGRESAR</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+        <script src="js/tether.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="dist/js/ripples.js"></script>
+        <script src="dist/js/material.min.js"></script>  
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="common/login.js"></script>
+    </body>
+</html>

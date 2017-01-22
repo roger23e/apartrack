@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>APARTRACK</title>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="dist/css/bootstrap-material-design.css" rel="stylesheet">
+        <link href="dist/css/ripples.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                        <!--span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span-->
+                    </button>
+                    <a class="navbar-brand" href="index.html">APARTRACK</a>
+                </div>
+                <div class="navbar-collapse collapse navbar-responsive-collapse">
+                </div>
+            </div>
+        </div>
+        <div id="preloader">
+            <div id="status">
+                <div class="preloader-logo"></div>
+                <h3></h3>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 ">
+                    <div class="well text-center" style="margin-top: 10px; padding: 0;">
+                        <form>
+                            <h3>Bienvenid@</h3>
+                            <h4 id="fullNsme"></h4>
+                            <div>
+                                <img id="picture" src="" alt="" height="150" width="150">
+                            </div>
+                            <h5>¿Que deseas hacer?</h5>
+                            <button type="button" id="buttonVer" class="btn btn-raised btn-primary btn-block">VER MIS PUBLICACIONES</button>
+                            <button type="button" id="buttonPublicar" class="btn btn-raised btn-primary btn-block">PUBLICAR</button>
+                            <button type="button" id="buttonRegresar" class="btn btn-raised btn-primary btn-block">REGRESAR</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+        <script src="js/tether.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="dist/js/ripples.js"></script>
+        <script src="dist/js/material.min.js"></script>  
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="common/bienvenida.js"></script>
+        <!--script>
+           
+            var PICTURE = null;
+            
+            function statusChangeCallback(response){}
+
+            function checkLoginState() 
+            {
+                FB.getLoginStatus(function(response) 
+                {
+                    statusChangeCallback(response);
+                });
+            }
+            
+            window.fbAsyncInit = function() 
+            {
+                FB.init({
+                    appId      : '101065767035181',
+                    cookie     : true,
+                    xfbml      : true,
+                    version    : 'v2.8'
+                });
+                
+                FB.getLoginStatus(function(response) 
+                {
+                    statusChangeCallback(response);
+                });
+            };
+            
+            (function(d, s, id) 
+            {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+            
+            $(document).ready(function()
+            {
+                
+                $("#fullNsme").text(localStorage.getItem("full_name"));
+                
+                PICTURE = localStorage.getItem("picture_url");
+
+                console.log(PICTURE);
+                
+                $('#picture').attr('src',PICTURE);
+                
+                
+                $("#vender").click(function(e)
+                {
+                    $(location).attr("href","listaInmuebles.html");
+                });
+
+                $("#preloader").delay(60).fadeOut("slow");
+                
+                $("#buttonLogOutWithFacebook").click(function()
+                {
+                    FB.getLoginStatus(function(response) 
+                    {
+                        if (response && response.status === 'connected') 
+                        {
+                            FB.logout(function(response) 
+                            {
+                                $(location).attr("href", "ingresar2.html");
+                            });
+                        }
+                        else
+                        {
+                            localStorage.clear();
+                            $(location).attr("href", "ingresar2.html");
+                        }
+                    });
+                });
+            });
+        </script-->
+    </body>
+</html>
