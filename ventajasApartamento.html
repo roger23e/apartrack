@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>APARTRACK</title>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="dist/css/bootstrap-material-design.css" rel="stylesheet">
+        <link href="dist/css/ripples.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                    </button>
+                    <a class="navbar-brand" href="index.html">APARTRACK</a>
+                </div>
+                <div class="navbar-collapse collapse navbar-responsive-collapse">
+                </div>
+            </div>
+        </div>
+        <div id="preloader">
+            <div id="status">
+                <div class="preloader-logo"></div>
+                <h3></h3>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 ">
+                    <div class="well" style="margin-top: 10px; padding: 0;">
+                        <form>
+                            <div id="ventajas" >
+                            </div>
+                            <div id="error" class="alert alert-danger text-center" style="display: none; margin-bottom: 0px; margin-top: 5px; font-size: 10px; ">
+                                <strong></strong>
+                            </div>
+                            <div class="form-group"  style="text-align: center; margin-top: 15px;">
+                                <button type="button" id="buttonContinuar" class="btn btn-raised btn-primary btn-block">CONTINUAR</button>
+                                <button type="button" id="buttonRegresar" class="btn btn-raised btn-primary btn-block">REGRESAR</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>   
+        <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+        <script src="js/tether.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="dist/js/ripples.js"></script>
+        <script src="dist/js/material.min.js"></script>  
+        <script type="text/javascript" src="cordova.js"></script>
+        <!--script type="text/javascript" src="common/caracteristicasApartamento.js"></script-->
+        <script type="text/javascript">
+
+
+            var URL                         = null;
+            var METODO                      = null;
+            var VALOR                       = null;
+            var LOADER                      = null;
+            var ERROR                       = null;
+            
+            var DATA                        = null;
+            
+            var CODIGO_APARTAMENTO          = null;
+            var DESCRIPCION                 = null;
+            var PRECIO                      = null;
+            var METROS                      = null;
+            var NUM_HABITACIONES            = null;
+            var NUM_BANIOS                  = null;
+            
+            var IMAGENES                    = null;
+            var CARACTERISTICAS             = null;
+            var ALREDEDORES                 = null;
+            var CARACTERISTICAS_APARTAMENTO = null;
+            var VENTAJAS                    = null;
+            var VENTAJAS_APARTAMENTO        = null;
+            var TIPO_NEGOCIACION            = null;
+         
+            function call_Ajax_Jsonp(URL, METODO, VALOR, LOADER, ERROR, FN) 
+            {
+                $.ajax
+                ({
+                    type: "GET",
+                    url: "http://apartrack.com/REP/common/ws-apartamentos.php?",
+                    data:
+                    {
+                        m: METODO,
+                        v: VALOR
+                    },
+                    dataType: "jsonp",
+                    jsonp: "callback",
+                    jsonpCallback: "JasonpCallback",
+                    async: true,
+                    beforeSend: function()
+                    {
+                        $(LOADER).css("display", "block");
+                        $(LOADER).css("padding-bottom", "15px");
+                    },
+                    complete: function()
+                    {
+                        $(LOADER).css("display", "none");
+                    },
+                    success: function(data)
+                    {
+                        FN(data);
+                    },
+                    error: function () 
+                    {
+                        $(ERROR).css("display", "block");
+                        $(ERROR).html("<p style='padding:10px; color:red;'>No se pudo conectar, por favor intente nuevamente.</p>");
+                    }
+                });
+            }
+            
+            $(document).ready(function()
+            {  
+                URL                 = "common/ws-apartamentos.php?format=json";
+                METODO              = "LEER_INFORMACION_APARTAMENTO";
+
+                call_Ajax_Jsonp(URL, METODO, VALOR, LOADER, ERROR, function(data) 
+                {   
+                    DATA                        = data;                    
+                    VENTAJAS                    = DATA.VENTAJAS;
+                    console.log(VENTAJAS);
+                    
+                    $.each(VENTAJAS, function(index)
+                    {  
+                        LI =     
+                            "<div class='form-group'>" +
+                                "<div class='checkbox'>" +
+                                    "<label>" +
+                                        "<input type='checkbox' class='checkbox-ventajas' id='" + VENTAJAS[index].COD_VENTAJA_APARTAMENTO + "' name='" + VENTAJAS[index].COD_VENTAJA_APARTAMENTO + "'><span class='checkbox-material'><span class='check'></span></span> " + VENTAJAS[index].VENTAJA + "" +
+                                    "</label>" +
+                                "</div>" +
+                            "</div>" ;
+
+                        $('#ventajas').append(LI);
+                    });
+                });  
+
+                $("#buttonContinuar").click(function(e)
+                {
+                    var ARRAY_VENTAJAS = []; 
+                    $(".checkbox-ventajas").each(function() 
+                    {                        
+                        ARRAY_VENTAJAS.push($(this).attr("id"));
+                    });
+                    localStorage.setItem("ventajas",JSON.stringify(ARRAY_VENTAJAS));
+                    $(location).attr("href","imagenesApartamento.html");
+                });
+                
+                $("#buttonRegresar").click(function(e)
+                {
+                    $(location).attr("href","caracteristicasApartamento.html");
+                });
+                
+                $("#preloader").delay(60).fadeOut("slow");
+            });
+        </script>
+    </body>
+</html>

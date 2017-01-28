@@ -18,9 +18,6 @@
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                        <!--span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span-->
                     </button>
                     <a class="navbar-brand" href="index.html">APARTRACK</a>
                 </div>
@@ -36,20 +33,10 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 ">
-                    <div class="well text-center" style="margin-top: 10px; padding: 0;">
-                        <form>
-                            <h3>Bienvenid@</h3>
-                            <h4 id="fullNsme"></h4>
-                            <div>
-                                <img id="picture" src="" alt="" height="150" width="150">
-                            </div>
-                            <h5>¿Que deseas hacer?</h5>
-                            <button type="button" id="buttonVer" class="btn btn-raised btn-primary btn-block">VER MIS PUBLICACIONES</button>
-                            <button type="button" id="buttonPublicar" class="btn btn-raised btn-primary btn-block">PUBLICAR</button>
-                            <button type="button" id="buttonRegresar" class="btn btn-raised btn-primary btn-block">REGRESAR</button>
-                        </form>
-                    </div>
+                <div class="box col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height: auto; padding-bottom: 20px; border: 1px solid #ebeced; text-align: center;">
+                    <h3>Seleccione el inmueble donde desea publicar su propiedad</h3>
+                    <ul class="" id="inmuebles" style="margin: 0; padding: 0;">
+                    </ul>
                 </div>
             </div>
         </div>
@@ -59,6 +46,6 @@
         <script src="dist/js/ripples.js"></script>
         <script src="dist/js/material.min.js"></script>  
         <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="common/bienvenida.js"></script>
+        <script type="text/javascript" src="common/lista_inmuebles.js"></script>
     </body>
 </html>

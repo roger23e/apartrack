@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>APARTRACK</title>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="dist/css/bootstrap-material-design.css" rel="stylesheet">
+        <link href="dist/css/ripples.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                    </button>
+                    <a class="navbar-brand" href="index.html">APARTRACK</a>
+                </div>
+                <div class="navbar-collapse collapse navbar-responsive-collapse">
+                </div>
+            </div>
+        </div>
+        <div id="preloader">
+            <div id="status">
+                <div class="preloader-logo"></div>
+                <h3></h3>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12 ">
+                    <div class="well" style="margin-top: 10px; padding: 0;">
+                        <form>
+                            <div id="imagenes" >
+                                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                                    <a class="thumbnail click" href="agregarImagen.html">
+                                        <img class="img-responsive" src="http://placehold.it/300x300/aa5033/ffffff/?text=Agregar+Imagenes" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="error" class="alert alert-danger text-center" style="display: none; margin-bottom: 0px; margin-top: 5px; font-size: 10px; ">
+                                <strong></strong>
+                            </div>
+                            <div class="form-group"  style="text-align: center; margin-top: 15px;">
+                                <button type="button" id="buttonContinuar" class="btn btn-raised btn-primary btn-block">CONTINUAR</button>
+                                <button type="button" id="buttonRegresar" class="btn btn-raised btn-primary btn-block">REGRESAR</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <!--div class="container">
+            <div class="row">
+                <div id="imagenes">
+                    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                        <a class="thumbnail click" href="agregarImagen.html">
+                            <img class="img-responsive" src="http://placehold.it/300x300/aa5033/ffffff/?text=Agregar+Imagenes" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-xs-12 text-center" style="margin-bottom: 20px;">
+                    <button type="button" id="continuar" class="btn btn-default">CONTINUAR</button>
+                </div>
+            </div>
+        </div-->
+        <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+        <script src="js/tether.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="dist/js/ripples.js"></script>
+        <script src="dist/js/material.min.js"></script>  
+        <script type="text/javascript" src="cordova.js"></script>
+        <!--script type="text/javascript" src="common/caracteristicasApartamento.js"></script-->
+        <script>
+            imagenes    = null;
+            imagen      = null;
+            
+            $(document).ready(function() 
+            {            
+                $("#preloader").delay(60).fadeOut("slow");
+                imagenes = localStorage.getItem("imagenes");
+                jaonImagenes = JSON.parse(imagenes);              
+                $.each(jaonImagenes, function (index)
+                {
+                    imagen = 
+                        "<div class='col-lg-3 col-md-4 col-xs-6 thumb'>" +
+                            //"<img class='img-responsive' src='" + "http://localhost/REPMOVIL/" + jaonImagenes[index] + "' alt=''>"+
+                            "<img class='img-responsive' src='" + "http://apartrack.com/REPMOVIL/" + jaonImagenes[index] + "' alt=''>"+
+                        "</div>";
+                    $('#imagenes').append(imagen); 
+                });
+            });
+            $("#buttonContinuar").click(function(e)
+            {
+                $(location).attr("href","main.html");
+            });
+            
+            $("#buttonRegresar").click(function(e)
+            {
+                $(location).attr("href","main.html");
+            });
+        </script>
+    </body>
+</html>
