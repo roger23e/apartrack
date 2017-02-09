@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>APARTRACK</title>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="dist/css/ripples.min.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="css/custom.css" rel="stylesheet" type="text/css"/>
+        <link href="dist/css/bootstrap-material-design.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="navbar navbar-default ">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                    </button>
+                    <a class="navbar-brand" href="javascript:void(0)">APARTRACK</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                </div>
+            </div>
+        </div>
+        <!--div id="main">
+            <div class="row" style="display: block;">
+                <div id="error-notificacion" class="static-notification bg-red-dark tap-dismiss" style="display: none;">
+                    <p id="error" style="text-transform: uppercase; font-size: 8px;">
+                    </p>
+                </div>
+                <div id="ubicacion-notificacion" class="static-notification bg-green-dark tap-dismiss" style="display: none;">
+                    <p id="ubicacion" style="text-transform: uppercase; font-size: 8px;">
+                    </p>
+                </div>
+            </div>
+        </div-->
+        <div id="preloader">
+            <div id="status">
+                <div class="preloader-logo"></div>
+                <h3></h3>
+            </div>
+        </div>
+
+        <!--div class="container-fluid" style=" padding-top: 60px;">
+            <div class="row">
+                <nav class="navbar navbar-default navbar-fixed-top" >
+                    <div class="navbar-header" style="margin-left:5px; width:100%;">
+                        <button id="iconOrdenarNumericDesc" type="button" style="display: none; margin-right: 20px;" class="navbar-toggle navbar-right" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="fa fa-sort-numeric-desc"></span>
+                        </button>
+                        <button id="iconOrdenarNumericAsc" type="button" style="margin-right: 20px;" class="navbar-toggle navbar-right" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="fa fa-sort-numeric-asc"></span>
+                        </button>
+                        <button id="iconOrdenarDesc" type="button" style="display: none;" class="navbar-toggle navbar-right" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="fa fa-sort-alpha-desc"></span>
+                        </button>
+                        <button id="iconOrdenarAsc" type="button" class="navbar-toggle navbar-right" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="fa fa-sort-alpha-asc"></span>
+                        </button>
+                        <button id="iconBuscar" type="button" class="navbar-toggle navbar-right" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="fa fa-search fa-lg"></span>
+                        </button>
+                        <button id="iconLogin" type="button" class="navbar-toggle navbar-right" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="fa fa-sign-in fa-lg"></span>
+                        </button>
+                        <a href="index.html" class="navbar-brand">
+                            <img style="display: inline; width: 30px; height: 30px;" src="img/logo-mini.png" alt=""/>
+                            APARTRACK
+                        </a>
+                        <div id="divBuscar" style="display: none; padding-bottom: 10px;" class="container">
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="margin: 0; padding: 0;">
+                                <input id="buscarInmueble" style="display: block; width: 100%;" type="text" class="form-control" placeholder="INMUEBLE">
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="margin: 0; padding: 0;">
+                                <button id="buttonBuscar" style="display: block; width: 100%; margin-top: 1px;" type="button" class="btn btn-block">BUSCAR</button>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div-->
+        <div class="container container-table">
+            <div class="row vertical-center-row" id="inmuebles">
+            </div>
+        </div>
+        <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+        <script src="js/tether.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="dist/js/ripples.js"></script>
+        <script src="dist/js/material.min.js"></script> 
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="js/configuracion.js" type="text/javascript" ></script>
+        <script>
+            $(function () 
+            {
+                $.material.init();
+            });
+
+            var DATA                = null;
+            var POSICION            = null;
+            var LATITUD             = null;
+            var LONGITUD            = null;
+            var CALCULAR_DISTANCIA  = null;
+            var INMUEBLE            =   '<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">' +
+                                            '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fondo">' +
+                                                '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 centro">' +
+                                                    '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fila-0">' +
+                                                        '<img class="img-list img-responsive" alt="" src="$IMAGEN/inmueble_list_img.jpg">' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 centro">' +
+                                                    '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fila-1">' +
+                                                        '<p class="titulo" >$NOMBRE' +
+                                                            '<br>' +
+                                                            '<i class="fa fa-star" aria-hidden="true"></i>' +
+                                                            '<i class="fa fa-star" aria-hidden="true"></i>' +
+                                                            '<i class="fa fa-star" aria-hidden="true"></i>' +
+                                                            '<i class="fa fa-star" aria-hidden="true"></i>' +
+                                                            '<i class="fa fa-star" aria-hidden="true"></i>' +
+                                                            '<br>' +
+                                                            '<i class="fa fa-map-marker" aria-hidden="true"></i>' +
+                                                            '$UBICACION' +
+                                                        '</p>' +
+                                                    '</div>' +
+                                                    '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fila-2">' +
+                                                        '<p style="text-align:center; line-height:40px; font-size:9px;font-weight: bold;">' +
+                                                            'Disponibles: $NUMERO_APARTAMENTOS' + 
+                                                        '</p>' +
+                                                    '</div>' +
+                                                    '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fila-2 text-center"  style="border-right: 0.5px solid #b3b3b3;">' +
+                                                        '<button type="button" class="btn btn-raised btn-primary boton inmueble" style="padding: 6px 30px; margin: 4px 1px" onClick="divFunction($(this))" id=$LINK>VER</button>' +
+                                                    '</div> ' +
+                                                '</div>' +
+                                             '</div>' +
+                                        '</div>';
+            
+            
+            function get_coords(callback) 
+            {
+                if (navigator.geolocation)
+                {
+                     navigator.geolocation.getCurrentPosition(function(position)
+                     {
+                         var lat = position.coords.latitude;
+                         var lng = position.coords.longitude;
+                         callback(["coords", lat, lng]);
+                    },
+                    function(error)
+                    {
+                        if (error.code === error.TIMEOUT)
+                        {
+                            navigator.geolocation.getCurrentPosition(function(position)
+                            {
+                                var lat = position.coords.latitude;
+                                var lng = position.coords.longitude;
+                                callback(["coords", lat, lng]);
+                            },
+                            function(error)
+                            {
+                                if (error.code === 1)
+                                {
+                                    callback(["geoloc_deactivated"]);
+                                }
+                                else if (error.code === 2)
+                                {
+                                    callback(["position_unavailable"]);
+                                }
+                                else  if (error.code === 3)
+                                {
+                                    callback(["timeout"]);
+                                }
+                            },
+                            {
+                                maximumAge:120000,
+                                timeout:120000,
+                                enableHighAccuracy: false
+                            });
+                        }
+                        if (error.code === 1)
+                        {
+                            callback(["geoloc_deactivated"]);
+                        }
+                        else if (error.code === 2)
+                        {
+                            callback(["position_unavailable"]);
+                        }
+
+                    },
+                    {
+                        maximumAge:60000,
+                        timeout:60000,
+                        enableHighAccuracy: true
+                    });
+                }
+                else
+                {
+                    callback(["geoloc_not_supported"]);
+                }
+            }
+
+            function SortObjectsByNameAsc(a, b)
+            {
+                var a1 = a.NOMBRE; 
+                var b1 = b.NOMBRE;
+                if(a1 === b1)
+                { 
+                    return 0; 
+                }
+                else
+                {
+                    return a1 > b1? 1: -1;
+                }
+            };
+            
+            function SortObjectsByNameDesc(a, b)
+            {
+                var a1 = a.NOMBRE; 
+                var b1 = b.NOMBRE;
+                if(a1 === b1)
+                { 
+                    return 0; 
+                }
+                else
+                {
+                    return a1 < b1 ? -1 : 1;
+                }
+            };
+            
+            function SortObjectsByDistance(a, b)
+            {
+                var a1 = a.DISTANCIA; 
+                var b1 = b.DISTANCIA;
+                if(a1 === b1)
+                { 
+                    return 0; 
+                }
+                else
+                {
+                    return a1 < b1 ? -1 : 1;
+                }
+            };
+            
+            function divFunction(e)
+            {
+                $(location).attr("href", "inmueble.html?id=" + e.attr("id"));
+            };
+
+            $(document).ready(function ()
+            {
+                get_coords(function(callback)
+                {
+                    if (callback[0] === "coords")
+                    {
+                        POSICION            = [callback[1],callback[2]];
+                        LATITUD             = callback[1];
+                        LONGITUD            = callback[2];
+                        CALCULAR_DISTANCIA  = true;
+                        
+                        $("#ubicacion").append('<i class="fa fa-times" style="padding-top: 9px;"></i>' + 'Latitud:  ' + LATITUD + '  Longitud: ' + LONGITUD);
+                        $("#error-notificacion").css("display", "none");
+                        $("#ubicacion-notificacion").css("display", "block");
+                        $("#inmuebles").empty();
+                        METODO = "LEER_INMUEBLES_ORDENADOS";
+                        VALOR = (LATITUD + "|" + LONGITUD);
+
+                        call_Ajax_Jsonp(URL, METODO, VALOR, LOADER, ERROR, function (data)
+                        {
+                            DATA = data.INMUEBLES;
+                            $.each(DATA, function (index)
+                            {
+                                DISTANCIA = DATA[index].DISTANCIA;
+
+                                if (DISTANCIA < 1)
+                                {
+                                    DISTANCIA = (DISTANCIA * 1000);
+                                    DISTANCIA = (parseFloat(DISTANCIA).toFixed(0) + " Mts");
+                                } 
+                                else 
+                                {
+                                    DISTANCIA = (parseFloat(DISTANCIA).toFixed(0) + " Km");
+                                }
+                                
+                                IMAGEN              = RUTA_IMAGEN + DATA[index].COD_INMUEBLE;
+                                NOMBRE              = DATA[index].NOMBRE.toUpperCase(); 
+                                UBICACION           = '<span style="font-size:10px;"> ' + DISTANCIA +' de tu ubicacion</span>';
+                                NUMERO_APARTAMENTOS = DATA[index].NUMERO_APARTAMENTOS;
+                                LINK                = DATA[index].COD_INMUEBLE;
+                                INMUEBLE_LIST       = INMUEBLE;
+                                
+                                INMUEBLE_LIST = INMUEBLE_LIST.replace('$IMAGEN', IMAGEN);
+                                INMUEBLE_LIST = INMUEBLE_LIST.replace('$NOMBRE', NOMBRE);
+                                INMUEBLE_LIST = INMUEBLE_LIST.replace('$UBICACION', UBICACION);
+                                INMUEBLE_LIST = INMUEBLE_LIST.replace('$NUMERO_APARTAMENTOS', NUMERO_APARTAMENTOS);
+                                INMUEBLE_LIST = INMUEBLE_LIST.replace('$LINK', LINK);
+
+                                $('#inmuebles').append(INMUEBLE_LIST); 
+                                
+                            });
+                            $("#preloader").delay(60).fadeOut("slow");
+                        });
+                    }
+                    else 
+                    {
+                        LATITUD             = "10.4673007";
+                        LONGITUD            = "-66.5878883";
+                        CALCULAR_DISTANCIA  = false;
+
+                        
+                        $("#error").append('<i class="fa fa-times" style="padding-top: 9px;"></i>' + 'No se pudo acceder a su ubicacion.');
+                        $("#error-notificacion").css("display", "block");
+                        $("#ubicacion-notificacion").css("display", "none");
+                        
+                        $("#inmuebles").empty();
+                        METODO = "LEER_INMUEBLES_ORDENADOS";
+                        VALOR = (LATITUD + "|" + LONGITUD);
+
+                        call_Ajax_Jsonp(URL, METODO, VALOR, LOADER, ERROR, function (data)
+                        {
+                            DATA = data.INMUEBLES;
+                            $.each(DATA, function (index)
+                            {                                
+                                IMAGEN              = RUTA_IMAGEN + DATA[index].COD_INMUEBLE;
+                                NOMBRE              = DATA[index].NOMBRE.toUpperCase(); 
+                                UBICACION           = '<span style="font-size:10px;"> Distancia no disponible</span>';
+                                NUMERO_APARTAMENTOS = DATA[index].NUMERO_APARTAMENTOS;
+                                LINK                = DATA[index].COD_INMUEBLE;
+                                INMUEBLE_LIST       = INMUEBLE;
+                                //console.log(UBICACION);
+                                INMUEBLE_LIST = INMUEBLE_LIST.replace('$IMAGEN', IMAGEN);
+                                INMUEBLE_LIST = INMUEBLE_LIST.replace('$NOMBRE', NOMBRE);
+                                INMUEBLE_LIST = INMUEBLE_LIST.replace('$UBICACION', UBICACION);
+                                INMUEBLE_LIST = INMUEBLE_LIST.replace('$NUMERO_APARTAMENTOS', NUMERO_APARTAMENTOS);
+                                INMUEBLE_LIST = INMUEBLE_LIST.replace('$LINK', LINK);
+
+                                $('#inmuebles').append(INMUEBLE_LIST); 
+                                $('#iconOrdenarNumericAsc').css("display", "none");
+                                $('#iconOrdenarNumericDesc').css("display", "none");
+                                
+                            });
+                            
+                            //$( "#iconOrdenarAsc" ).trigger( "click" );
+                            $("#preloader").delay(60).fadeOut("slow");
+                            
+                        });
+                        
+                    }
+                    /*
+                    else if(callback[0] === "position_unavailable")
+                    {
+                    }
+                    else if(callback[0] === "timeout")
+                    {
+                    }
+                    else if(callback[0] === "geoloc_deactivated")
+                    {
+                    }
+                    else if(callback[0] === "geoloc_not_supported")
+                    {
+                    }*/
+                });
+
+                $('.tap-dismiss').click(function ()
+                {
+                    $(this).slideUp(600);
+                    return false;
+                });
+                
+                $('#iconBuscar').click(function ()
+                {
+                    if($("#divBuscar").css("display") === "none")
+                    {
+                        $("#divBuscar").css("display", "block");
+                        $('#buscarInmueble').val("");
+                        $("#buscarInmueble").focus();
+                    }
+                    else
+                    {
+                        $("#divBuscar").css("display", "none");
+                    }
+                });
+                
+                $('#buttonBuscar').click(function ()
+                {
+                    $("#preloader").delay(60).fadeIn("slow", function()
+                    {
+                        MATCH = $('#buscarInmueble').val();                    
+                        DATASEARCH = DATA.filter( function (INMUEBLES){return INMUEBLES.NOMBRE.toUpperCase().match(MATCH.toUpperCase());});
+                        $('#inmuebles').empty();
+                        $.each(DATASEARCH, function (index)
+                        {
+                            DISTANCIA = DATASEARCH[index].DISTANCIA;
+
+                            if (DISTANCIA < 1)
+                            {
+                                DISTANCIA = (DISTANCIA * 1000);
+                                DISTANCIA = (parseFloat(DISTANCIA).toFixed(0) + " Mts");
+                            } 
+                            else 
+                            {
+                                DISTANCIA = (parseFloat(DISTANCIA).toFixed(0) + " Km");
+                            }
+
+                            IMAGEN              = RUTA_IMAGEN + DATASEARCH[index].COD_INMUEBLE;
+                            NOMBRE              = DATASEARCH[index].NOMBRE.toUpperCase(); 
+                            UBICACION           = '<span style="font-size:10px;"> ' + DISTANCIA +' de tu ubicacion</span>';
+                            NUMERO_APARTAMENTOS = DATASEARCH[index].NUMERO_APARTAMENTOS;
+                            LINK                = DATASEARCH[index].COD_INMUEBLE;
+                            INMUEBLE_LIST       = INMUEBLE;
+
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$IMAGEN', IMAGEN);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$NOMBRE', NOMBRE);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$UBICACION', UBICACION);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$NUMERO_APARTAMENTOS', NUMERO_APARTAMENTOS);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$LINK', LINK);
+
+                            $('#inmuebles').append(INMUEBLE_LIST); 
+                            $("#divBuscar").css("display", "none");
+                        });
+                        $("#preloader").delay(600).fadeOut("slow");
+                    });
+                });
+                
+                $('#iconOrdenarAsc').click(function ()
+                { 
+                    $("#preloader").delay(60).fadeIn("slow", function()
+                    {
+                        DATAORDERASC = DATA.sort(SortObjectsByNameAsc);
+                        $('#iconOrdenarAsc').css("display","none");
+                        $('#iconOrdenarDesc').css("display","block");
+                        $('#inmuebles').empty();
+
+                        $.each(DATAORDERASC, function (index)
+                        {
+                            DISTANCIA = DATAORDERASC[index].DISTANCIA;
+
+                            if (DISTANCIA < 1)
+                            {
+                                DISTANCIA = (DISTANCIA * 1000);
+                                DISTANCIA = (parseFloat(DISTANCIA).toFixed(0) + " Mts");
+                            } 
+                            else 
+                            {
+                                DISTANCIA = (parseFloat(DISTANCIA).toFixed(0) + " Km");
+                            }
+
+                            IMAGEN              = RUTA_IMAGEN + DATAORDERASC[index].COD_INMUEBLE;
+                            NOMBRE              = DATAORDERASC[index].NOMBRE.toUpperCase();
+
+                            if (!CALCULAR_DISTANCIA)
+                            {
+                                UBICACION           = '<span style="font-size:10px;"> Distancia no disponible</span>';
+                            }
+                            else
+                            {
+                                UBICACION           = '<span style="font-size:10px;"> ' + DISTANCIA +' de tu ubicacion</span>';
+                            }
+
+                            NUMERO_APARTAMENTOS = DATAORDERASC[index].NUMERO_APARTAMENTOS;
+                            LINK                = DATAORDERASC[index].COD_INMUEBLE;
+                            INMUEBLE_LIST       = INMUEBLE;
+
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$IMAGEN', IMAGEN);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$NOMBRE', NOMBRE);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$UBICACION', UBICACION);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$NUMERO_APARTAMENTOS', NUMERO_APARTAMENTOS);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$LINK', LINK);
+
+                            $('#inmuebles').append(INMUEBLE_LIST); 
+                        });
+                        $("#preloader").delay(600).fadeOut("slow");
+                    });
+                });
+                
+                $('#iconOrdenarDesc').click(function ()
+                {
+                    $("#preloader").delay(60).fadeIn("slow", function()
+                    {
+                        DATAORDERDES = DATAORDERASC.reverse();
+                        $('#iconOrdenarAsc').css("display","block");
+                        $('#iconOrdenarDesc').css("display","none");
+                        $('#inmuebles').empty();
+                        $.each(DATAORDERDES, function (index)
+                        {
+                            DISTANCIA = DATAORDERASC[index].DISTANCIA;
+
+                            if (DISTANCIA < 1)
+                            {
+                                DISTANCIA = (DISTANCIA * 1000);
+                                DISTANCIA = (parseFloat(DISTANCIA).toFixed(0) + " Mts");
+                            } 
+                            else 
+                            {
+                                DISTANCIA = (parseFloat(DISTANCIA).toFixed(0) + " Km");
+                            }
+
+                            IMAGEN              = RUTA_IMAGEN + DATAORDERDES[index].COD_INMUEBLE;
+                            NOMBRE              = DATAORDERDES[index].NOMBRE.toUpperCase(); 
+
+                            if (!CALCULAR_DISTANCIA)
+                            {
+                                UBICACION           = '<span style="font-size:10px;"> Distancia no disponible</span>';
+                            }
+                            else
+                            {
+                                UBICACION           = '<span style="font-size:10px;"> ' + DISTANCIA +' de tu ubicacion</span>';
+                            }                        
+
+                            NUMERO_APARTAMENTOS = DATAORDERDES[index].NUMERO_APARTAMENTOS;
+                            LINK                = DATAORDERDES[index].COD_INMUEBLE;
+                            INMUEBLE_LIST       = INMUEBLE;
+
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$IMAGEN', IMAGEN);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$NOMBRE', NOMBRE);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$UBICACION', UBICACION);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$NUMERO_APARTAMENTOS', NUMERO_APARTAMENTOS);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$LINK', LINK);
+
+                            $('#inmuebles').append(INMUEBLE_LIST); 
+                        });
+                        $("#preloader").delay(600).fadeOut("slow");
+                    });
+                });          
+                
+                $('#iconOrdenarNumericAsc').click(function ()
+                { 
+                    $("#preloader").delay(60).fadeIn("slow", function()
+                    {
+                        DATADISTORDERASC = DATA.sort(SortObjectsByDistance);
+                        $('#iconOrdenarNumericAsc').css("display","none");
+                        $('#iconOrdenarNumericDesc').css("display","block");
+                        $('#inmuebles').empty();
+
+                        $.each(DATADISTORDERASC, function (index)
+                        {
+                            DISTANCIA = DATADISTORDERASC[index].DISTANCIA;
+
+                            if (DISTANCIA < 1)
+                            {
+                                DISTANCIA = (DISTANCIA * 1000);
+                                DISTANCIA = (parseFloat(DISTANCIA).toFixed(0) + " Mts");
+                            } 
+                            else 
+                            {
+                                DISTANCIA = (parseFloat(DISTANCIA).toFixed(0) + " Km");
+                            }
+
+                            IMAGEN              = RUTA_IMAGEN + DATADISTORDERASC[index].COD_INMUEBLE;
+                            NOMBRE              = DATADISTORDERASC[index].NOMBRE.toUpperCase(); 
+                            UBICACION           = '<span style="font-size:10px;"> ' + DISTANCIA +' de tu ubicacion</span>';
+                            NUMERO_APARTAMENTOS = DATADISTORDERASC[index].NUMERO_APARTAMENTOS;
+                            LINK                = DATADISTORDERASC[index].COD_INMUEBLE;
+                            INMUEBLE_LIST       = INMUEBLE;
+
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$IMAGEN', IMAGEN);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$NOMBRE', NOMBRE);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$UBICACION', UBICACION);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$NUMERO_APARTAMENTOS', NUMERO_APARTAMENTOS);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$LINK', LINK);
+
+                            $('#inmuebles').append(INMUEBLE_LIST); 
+                        });
+                        $("#preloader").delay(600).fadeOut("slow");
+
+                    });
+                });
+                
+                $('#iconOrdenarNumericDesc').click(function ()
+                {
+                    $("#preloader").delay(60).fadeIn("slow", function()
+                    {
+                        DATADISTORDERDES = DATADISTORDERASC.reverse();
+                        $('#iconOrdenarNumericAsc').css("display","block");
+                        $('#iconOrdenarNumericDesc').css("display","none");
+                        $('#inmuebles').empty();
+                        $.each(DATADISTORDERDES, function (index)
+                        {
+                            DISTANCIA = DATADISTORDERDES[index].DISTANCIA;
+
+                            if (DISTANCIA < 1)
+                            {
+                                DISTANCIA = (DISTANCIA * 1000);
+                                DISTANCIA = (parseFloat(DISTANCIA).toFixed(0) + " Mts");
+                            } 
+                            else 
+                            {
+                                DISTANCIA = (parseFloat(DISTANCIA).toFixed(0) + " Km");
+                            }
+
+                            IMAGEN              = RUTA_IMAGEN + DATADISTORDERDES[index].COD_INMUEBLE;
+                            NOMBRE              = DATADISTORDERDES[index].NOMBRE.toUpperCase(); 
+                            UBICACION           = '<span style="font-size:10px;"> ' + DISTANCIA +' de tu ubicacion</span>';
+                            NUMERO_APARTAMENTOS = DATADISTORDERDES[index].NUMERO_APARTAMENTOS;
+                            LINK                = DATADISTORDERDES[index].COD_INMUEBLE;
+                            INMUEBLE_LIST       = INMUEBLE;
+
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$IMAGEN', IMAGEN);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$NOMBRE', NOMBRE);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$UBICACION', UBICACION);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$NUMERO_APARTAMENTOS', NUMERO_APARTAMENTOS);
+                            INMUEBLE_LIST = INMUEBLE_LIST.replace('$LINK', LINK);
+
+                            $('#inmuebles').append(INMUEBLE_LIST); 
+                        });
+                        $("#preloader").delay(600).fadeOut("slow");
+                    });
+                }); 
+
+                $("#error-notificacion").delay(6000).fadeOut("slow");
+                $("#ubicacion-notificacion").delay(6000).fadeOut("slow");
+            });
+
+        </script>
+    </body>
+</html>

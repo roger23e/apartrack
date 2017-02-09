@@ -37,6 +37,11 @@ document.addEventListener("deviceready", function()
         $(location).attr("href","login.html");
     });
     
+    $("#buttonBuscar").click(function()
+    {
+        $(location).attr("href","inmuebles.html");
+    });
+    
     $("#preloader").delay(600).fadeOut("slow");
 });
 
@@ -47,5 +52,10 @@ $(document).ready(function()
         $(location).attr("href","login.html");
     });
     
-    $("#preloader").delay(600).fadeOut("slow")
+    $("#buttonBuscar").click(function()
+    {
+        $(location).attr("href","inmuebles.html");
+    });
+    
+    $("#preloader").delay(600).fadeOut("slow");
 });

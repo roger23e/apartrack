@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>::.APARTRACK.::</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link href="css/custom.css" rel="stylesheet" type="text/css"/>
+        <!--link href="css/docs.css" rel="stylesheet" type="text/css"/-->
+    </head>
+    <body style="background-color:#f2f2f2; text-align:center;">
+        <div id="preloader">
+            <div id="status">
+                <div class="preloader-logo"></div>
+                <h3></h3>
+            </div>
+        </div>
+        <div class="container-fluid" style=" padding-top: 60px;">
+            <div class="row">
+                <nav class="navbar navbar-default navbar-fixed-top" >
+                    <div class="navbar-header" style="margin-left:5px; width:100%;">
+                        <a href="index.html" class="navbar-brand">
+                            <img style="display: inline; width: 30px; height: 30px;" src="img/logo-mini.png" alt=""/>
+                            APARTRACK
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row show-grid"  id="apartamentos"></div>
+        </div>   
+        <script src="js/jquery-2.2.3.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/configuracion.js" type="text/javascript" ></script>
+        <script>
+            var DATA                = null;
+            var APARTAMENTOS        =   '<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">' +
+                                            '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fondo">' +
+                                                '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 centro">' +
+                                                    '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fila-0">' +
+                                                        '<img class="img-list img-responsive" alt="" src="$IMAGEN/inmueble_list_img.jpg">' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 centro">' +
+                                                    '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fila-1">' +
+                                                        '<p class="titulo" >$DESCRIPCION' +
+                                                            '<br>' +
+                                                            '<i class="fa fa-star" aria-hidden="true"></i>' +
+                                                            '<i class="fa fa-star" aria-hidden="true"></i>' +
+                                                            '<i class="fa fa-star" aria-hidden="true"></i>' +
+                                                            '<i class="fa fa-star" aria-hidden="true"></i>' +
+                                                            '<i class="fa fa-star" aria-hidden="true"></i>' +
+                                                            '<br>' +
+                                                            '<i class="fa fa-dollar" aria-hidden="true"></i>' +
+                                                            ' Costo: $PRECIO' +
+                                                        '</p>' +
+                                                    '</div>' +
+                                                    '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fila-2">' +
+                                                        '<p style="text-align:center; line-height:40px; font-size:9px;font-weight: bold;">' +
+                                                            //'Disponibles: $NUMERO_APARTAMENTOS' + 
+                                                        '</p>' +
+                                                    '</div>' +
+                                                    '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fila-2 text-center"  style="border-right: 0.5px solid #b3b3b3;">' +
+                                                        '<button type="button" class="btn btn-primary boton inmueble" onClick="divFunction($(this))" id=$LINK>VER</button>' +
+                                                    '</div> ' +
+                                                '</div>' +
+                                             '</div>' +
+                                        '</div>';
+            APARTAMENTOS =              '<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding: 2px; background-color: #f2f2f2; border: none;">' +
+                                            '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color: white; padding: 10px; border: none;">' +               
+                                                '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color: #f2f2f2;">' +
+                                                    '<p style="font-size:10px; line-height: 1.8; padding-top: 2px; color: #000000; font-weight: bold; text-align: center;">' +
+                                                       '$DESCRIPCION' +
+                                                    '</p>' +
+                                                '</div>' +
+                                                '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin: 0; padding: 0;">' +
+                                                    '<img style="width: 100%; height: auto;" src="http://panamabase.com/wp-content/uploads/2015/07/1-1-600x300.jpg" class="attachment-property-thumb size-property-thumb wp-post-image" alt="1">' +		
+                                                    '<div class="row"  style="margin: 0; padding: 0;">' +
+                                                        '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="background-color: #f2f2f2;">' +
+                                                            '<p style="font-size:10px; line-height: 1.8; padding-top: 2px; color: #000000; font-weight: bold; text-align: center;">' +
+                                                                '<span class="fa fa-expand fa-fw"> </span>' +
+                                                                'M2' +
+                                                            '</p>' +
+                                                        '</div>' +
+                                                        '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="background-color: #f2f2f2;">' +
+                                                            '<p style="font-size:10px; line-height: 1.8; padding-top: 2px; color: #000000; font-weight: bold; text-align: center;">' +
+                                                                '<span class="fa fa-bed fa-fw"> </span>' +
+                                                                '3 HABITACIONES' +
+                                                            '</p>' +
+                                                        '</div>' +
+                                                    '</div>' +
+                                                    '<div class="row"  style="margin: 0; padding: 0;">' +
+                                                        '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="background-color: #f2f2f2;">' +
+                                                            '<p style="font-size:10px; line-height: 1.8; padding-top: 2px; color: #000000; font-weight: bold; text-align: center;">' +
+                                                                '<span class="fa fa-tint fa-fw"> </span>' +
+                                                                '2 BAÑOS' +
+                                                            '</p>' +
+                                                        '</div>' +
+                                                        '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="background-color: #f2f2f2;">' +
+                                                            '<p style="font-size:10px; line-height: 1.8; padding-top: 2px; color: #000000; font-weight: bold; text-align: center;">' +
+                                                                '<span class="fa fa-dollar fa-fw"> </span>' +
+                                                                '$PRECIO' +
+                                                            '</p>' +
+                                                        '</div>' +
+                                                    '</div>' +
+                                                    '<div class="row"  style="margin: 0; padding: 0;">' +
+                                                        '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color: #f2f2f2;">' +
+                                                            '<button type="button" class="btn btn-primary boton" onClick="divFunction($(this))" id=$LINK>VER</button>' +
+                                                        '</div>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                            '</div>' +
+                                       '</div>';
+                                
+             var qs = (function(a) 
+            {
+                if (a === "") return {};
+                var b = {};
+                for (var i = 0; i < a.length; ++i)
+                {
+                    var p=a[i].split('=', 2);
+                    if (p.length === 1)
+                    {
+                        b[p[0]] = "";
+                    }   
+                    else
+                    {
+                        b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+                    }     
+                }
+                return b;
+            })(window.location.search.substr(1).split('&'));
+             
+            VALOR1  = qs["id"];
+            VALOR2  = qs["tipo"];
+            
+            function divFunction(e)
+            {
+                $(location).attr("href", "apartamento.html?id=" + e.attr("id"));
+            };
+                
+            $(document).ready(function ()
+            {
+                
+                if(VALOR2 === "Alquiler")
+                {
+                   METODO = "LEER_APARTAMENTOS_ALQUILER"; 
+                }
+                else if(VALOR2 === "Venta")
+                {
+                    METODO = "LEER_APARTAMENTOS_VENTA"; 
+                }
+
+                VALOR = (VALOR1);
+
+                call_Ajax_Jsonp(URL, METODO, VALOR, LOADER, ERROR, function (data)
+                {
+                    DATA = data.APARTAMENTOS;
+                    console.log(DATA);
+                    
+                    $.each(DATA, function (index)
+                    {
+                        IMAGEN              = RUTA_IMAGEN_APARTAMENTO + DATA[index].COD_APARTAMENTO;
+                        DESCRIPCION         = DATA[index].DESCRIPCION.toUpperCase(); 
+                        //UBICACION           = '<span style="font-size:10px;"> ' + DISTANCIA +' de tu ubicacion</span>';
+                        PRECIO              = DATA[index].PRECIO;
+                        LINK                = DATA[index].COD_APARTAMENTO;
+                        APARTAMENTO_LIST    = APARTAMENTOS;
+
+                        APARTAMENTO_LIST = APARTAMENTO_LIST.replace('$IMAGEN', IMAGEN);
+                        APARTAMENTO_LIST = APARTAMENTO_LIST.replace('$DESCRIPCION', DESCRIPCION);
+                        APARTAMENTO_LIST = APARTAMENTO_LIST.replace('$PRECIO', PRECIO);
+                        //APARTAMENTO_LIST = APARTAMENTO_LIST.replace('$NUMERO_APARTAMENTOS', NUMERO_APARTAMENTOS);
+                        APARTAMENTO_LIST = APARTAMENTO_LIST.replace('$LINK', LINK);
+
+                        $('#apartamentos').append(APARTAMENTO_LIST); 
+
+                    });
+                    $("#preloader").delay(60).fadeOut("slow");
+                });
+
+
+
+
+                
+
+                
+
+         
+
+
+            });
+
+        </script>
+    </body>
+</html>

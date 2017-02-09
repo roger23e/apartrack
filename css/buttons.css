@@ -1,0 +1,305 @@
+
+/** 2.8  Buttons Addons */
+.btn-custom {
+  position: relative;
+  padding: 9px 30px;
+  font-size: 14px;
+  line-height: 28px;
+  border-radius: 5px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-width: 2px;
+  transition: .3s;
+  backface-visibility: hidden;
+}
+
+.btn-custom:focus, .btn-custom:active, .btn-custom:active:focus {
+  outline: none;
+}
+
+.btn-custom .caret:last-child {
+  margin-left: 5px;
+}
+
+.btn-custom-group .btn-custom + .btn-custom,
+.btn-custom-group-lg .btn-custom + .btn-custom {
+  margin-left: -2px;
+}
+
+.btn-custom-group-sm .btn-custom + .btn-custom,
+.btn-custom-group-xs .btn-custom + .btn-custom {
+  margin-left: -1px;
+}
+
+.btn-custom-group > .btn-custom:hover,
+.btn-custom-group > .btn-custom:focus,
+.btn-custom-group > .btn-custom:active,
+.btn-custom-group > .btn-custom.active,
+.btn-custom-group-vertical > .btn-custom:hover,
+.btn-custom-group-vertical > .btn-custom:focus,
+.btn-custom-group-vertical > .btn-custom:active,
+.btn-custom-group-vertical > .btn-custom.active {
+  z-index: auto;
+}
+
+.btn-custom-positive {
+  color: #aa5033;
+  background-color: transparent;
+  border-color: #aa5033;
+}
+
+.btn-custom-positive:focus, .btn-custom-positive.focus, .btn-custom-positive:hover, .btn-custom-positive:active, .btn-custom-positive.active,
+.open > .btn-custom-positive.dropdown-toggle {
+  color: #fff;
+  background-color: #ed6a5a;
+  border-color: #ed6a5a;
+}
+
+.btn-custom-positive:active, .btn-custom-positive.active,
+.open > .btn-custom-positive.dropdown-toggle {
+  -webkit-box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.15);
+}
+
+.btn-custom-positive:active:hover, .btn-custom-positive:active:focus, .btn-custom-positive:active.focus, .btn-custom-positive.active:hover, .btn-custom-positive.active:focus, .btn-custom-positive.active.focus,
+.open > .btn-custom-positive.dropdown-toggle:hover,
+.open > .btn-custom-positive.dropdown-toggle:focus,
+.open > .btn-custom-positive.dropdown-toggle.focus {
+  color: #fff;
+  background-color: #ed6a5a;
+  border-color: #ed6a5a;
+}
+
+.btn-custom-positive.disabled, .btn-custom-positive[disabled],
+fieldset[disabled] .btn-custom-positive {
+  pointer-events: none;
+  opacity: .5;
+}
+
+.btn-custom-positive .badge {
+  color: transparent;
+  background-color: #ed6a5a;
+}
+
+.btn-custom-negative {
+  color: #fff;
+  background-color: #aa5033;
+  border-color: #aa5033;
+}
+
+.btn-custom-negative:focus, .btn-custom-negative.focus, .btn-custom-negative:hover, .btn-custom-negative:active, .btn-custom-negative.active,
+.open > .btn-custom-negative.dropdown-toggle {
+  color: #fff;
+  background-color: #e22f19;
+  border-color: #e22f19;
+}
+
+.btn-custom-negative:active, .btn-custom-negative.active,
+.open > .btn-custom-negative.dropdown-toggle {
+  -webkit-box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.15);
+}
+
+.btn-custom-negative:active:hover, .btn-custom-negative:active:focus, .btn-custom-negative:active.focus, .btn-custom-negative.active:hover, .btn-custom-negative.active:focus, .btn-custom-negative.active.focus,
+.open > .btn-custom-negative.dropdown-toggle:hover,
+.open > .btn-custom-negative.dropdown-toggle:focus,
+.open > .btn-custom-negative.dropdown-toggle.focus {
+  color: #fff;
+  background-color: #e22f19;
+  border-color: #e22f19;
+}
+
+.btn-custom-negative.disabled, .btn-custom-negative[disabled],
+fieldset[disabled] .btn-custom-negative {
+  pointer-events: none;
+  opacity: .5;
+}
+
+.btn-custom-negative .badge {
+  color: #ed6a5a;
+  background-color: #fff;
+}
+
+.btn-custom-xs, .btn-custom-group-xs > .btn-custom {
+  padding: 6px 16px;
+  font-size: 12px;
+  line-height: 20px;
+  border-radius: 3px;
+  border-width: 1px;
+}
+
+.btn-custom-sm, .btn-custom-group-sm > .btn-custom {
+  padding: 7px 12px;
+  font-size: 12px;
+  line-height: 24px;
+  border-radius: 3px;
+  border-width: 1px;
+}
+
+@media (min-width: 480px) {
+  .btn-custom-lg, .btn-custom-group-lg > .btn-custom {
+    padding: 17px 24px;
+    font-size: 17px;
+    line-height: 32px;
+    border-radius: 5px;
+  }
+}
+
+.btn-custom-rect {
+  border-radius: 0;
+}
+
+.btn-custom-ellipse.btn-custom {
+  border-radius: 25px;
+}
+
+.btn-custom-ellipse.btn-custom-xs, .btn-custom-group-xs > .btn-custom-ellipse.btn-custom {
+  border-radius: 17px;
+}
+
+.btn-custom-ellipse.btn-custom-sm, .btn-custom-group-sm > .btn-custom-ellipse.btn-custom {
+  border-radius: 20px;
+}
+
+.btn-custom-ellipse.btn-custom-lg, .btn-custom-group-lg > .btn-custom-ellipse.btn-custom {
+  border-radius: 35px;
+}
+
+.btn-custom-link {
+  position: relative;
+  border: none;
+  padding-left: 12px;
+  padding-right: 12px;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #434345;
+  line-height: 1.9;
+}
+
+.btn-custom-link:after {
+  content: '';
+  height: 2px;
+  position: absolute;
+  width: 60px;
+  left: 50%;
+  bottom: -2px;
+  transform: translateX(-50%);
+  transition: .3s;
+}
+
+.btn-custom-link:after {
+  background: -moz-linear-gradient(90deg, #ed6a5a 0%, #84c450 100%);
+  background: -webkit-linear-gradient(90deg, #ed6a5a 0%, #84c450 100%);
+  background: -o-linear-gradient(90deg, #ed6a5a 0%, #84c450 100%);
+  background: -ms-linear-gradient(90deg, #ed6a5a 0%, #84c450 100%);
+  background: linear-gradient(90deg, #ed6a5a 0%, #84c450 100%);
+}
+
+.btn-custom-link, .btn-custom-link:active, .btn-custom-link.active, .btn-custom-link[disabled],
+fieldset[disabled] .btn-custom-link {
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.btn-custom-link:hover, .btn-custom-link:focus {
+  color: inherit;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.btn-custom-link:hover:after, .btn-custom-link:focus:after {
+  width: 70px;
+}
+
+.btn-custom-link[disabled]:hover, .btn-custom-link[disabled]:focus,
+fieldset[disabled] .btn-custom-link:hover,
+fieldset[disabled] .btn-custom-link:focus {
+  color: inherit;
+  text-decoration: none;
+}
+
+.btn-custom.btn-custom-icon {
+  padding-left: 37px;
+  padding-right: 37px;
+}
+
+.btn-custom.btn-custom-icon .icon {
+  font-size: 16px;
+  line-height: 28px;
+  vertical-align: middle;
+  transition: 0s;
+}
+
+.btn-custom.btn-custom-icon-left .icon {
+  float: left;
+  padding-right: 10px;
+}
+
+.btn-custom.btn-custom-icon-right .icon {
+  float: right;
+  padding-left: 10px;
+}
+
+.btn-custom-xs.btn-custom-icon .icon, .btn-custom-group-xs > .btn-custom-icon.btn-custom .icon {
+  font-size: 20px;
+  line-height: 20px;
+}
+
+.btn-custom-xs.btn-custom-icon-left .icon, .btn-custom-group-xs > .btn-custom-icon-left.btn-custom .icon {
+  padding-right: 10px;
+}
+
+.btn-custom-xs.btn-custom-icon-right .icon, .btn-custom-group-xs > .btn-custom-icon-right.btn-custom .icon {
+  padding-left: 10px;
+}
+
+.btn-custom-sm.btn-custom-icon, .btn-custom-group-sm > .btn-custom-icon.btn-custom {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.btn-custom-sm.btn-custom-icon .icon, .btn-custom-group-sm > .btn-custom-icon.btn-custom .icon {
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.btn-custom-sm.btn-custom-icon-left .icon, .btn-custom-group-sm > .btn-custom-icon-left.btn-custom .icon {
+  padding-right: 8px;
+}
+
+.btn-custom-sm.btn-custom-icon-right .icon, .btn-custom-group-sm > .btn-custom-icon-right.btn-custom .icon {
+  padding-left: 8px;
+}
+
+.btn-custom-lg.btn-custom-icon, .btn-custom-group-lg > .btn-custom-icon.btn-custom {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.btn-custom-lg.btn-custom-icon .icon, .btn-custom-group-lg > .btn-custom-icon.btn-custom .icon {
+  font-size: 32px;
+  line-height: 32px;
+}
+
+.btn-custom-lg.btn-custom-icon-left .icon, .btn-custom-group-lg > .btn-custom-icon-left.btn-custom .icon {
+  padding-right: 14px;
+}
+
+.btn-custom-lg.btn-custom-icon-right .icon, .btn-custom-group-lg > .btn-custom-icon-right.btn-custom .icon {
+  padding-left: 14px;
+}
+
+.btn-custom-toolbar {
+  margin-left: 0;
+  -webkit-transform: translate(-10px, -10px);
+  transform: translate(-10px, -10px);
+}
+
+.btn-custom-toolbar > .btn-custom,
+.btn-custom-toolbar > .input-group,
+.btn-custom-toolbar > .btn-custom-group {
+  margin-left: 10px;
+  margin-top: 10px;
+}
