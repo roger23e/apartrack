@@ -18,7 +18,7 @@ function call_Ajax(USER, PASSWORD, FN)
     $.ajax
     ({
         type: "GET",
-        url: "https://www.apartrack.com/apartrack_movil/ws/login.php",
+        url: WS_URL + "login.php",
         data:
         {
             user:USER,
@@ -60,7 +60,7 @@ document.addEventListener("deviceready", function()
 {
     document.addEventListener("backbutton", onBackKeyDown, false);
     
-        var lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN);
+    var lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN);
     var userProfile;
 
     $('#buttonRedes').click(function(e) 
@@ -180,11 +180,48 @@ document.addEventListener("deviceready", function()
     
     $("#preloader").delay(600).fadeOut("slow"); 
 });
-/*
+
 $(document).ready(function() 
 {
-    $("#preloader").delay(600).fadeOut("slow");
-	
+    var lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN);
+    //var userProfile;
+
+    $('#buttonRedes').click(function(e) 
+    {
+        e.preventDefault();
+        lock.show
+        (
+            {
+                dict: 
+                {
+                    signin:
+                    {
+                        title: "Ingresa con:"                
+                    }
+                }
+            }, 
+            function(err, profile, token) 
+            {
+                if (err) 
+                {
+                    console.log("There was an error");
+                    alert("There was an error logging in");
+                } 
+                else 
+                {
+                  localStorage.setItem('userToken', token);
+                 /* userProfile = profile;
+                  $('.login-box').hide();
+                  $('.logged-in-box').show();
+                  $('.nickname').text(profile.nickname);
+                  $('.nickname').text(profile.name);
+                  $('.avatar').attr('src', profile.picture);*/
+                  $(location).attr("href","bienvenida.html");
+                }
+            }
+        );
+    });
+
     $("#buttonRegresar").click(function()
     {
         $(location).attr("href","index.html");
@@ -218,21 +255,18 @@ $(document).ready(function()
     {
         $(location).attr("href","registro.html");
     });
-    
-    $("#buttonRedes").click(function()
-    {
-        $(location).attr("href","redes.html");
-    });
-    
-    $('#user').change(function() 
+
+    $('#user').keydown(function() 
     {
         $("#error").delay(1000).fadeOut("slow");
     });
     
-    $('#password').change(function() 
+    $('#password').keydown(function() 
     {
         $("#error").delay(100).fadeOut("slow");
     });
+    
+    $("#preloader").delay(600).fadeOut("slow"); 
 });
 
-*/
+

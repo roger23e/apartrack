@@ -104,6 +104,106 @@ function onlibFail(message)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+    var varimageURI = null;
+
+    function getImagePHOTOLIBRARY() 
+    {
+        navigator.camera.getPicture(getImageSuccess,function(message) 
+        {
+            alert('FALLO LA CARGA DE LA IMAGEN ' + message);
+        },
+        {
+            quality: 100,
+            destinationType: navigator.camera.DestinationType.FILE_URI,
+            sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+            allowEdit : true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 300,
+            targetHeight: 300,
+            saveToPhotoAlbum: true
+        });
+    }
+
+
+    function getImageCAMERA() 
+    {
+        navigator.camera.getPicture(getImageSuccess,function(message) 
+        {
+            alert('FALLO LA CARGA DE LA IMAGEN ' + message);
+        },
+        {
+            quality: 100,
+            destinationType: navigator.camera.DestinationType.FILE_URI,
+            sourceType: navigator.camera.PictureSourceType.CAMERA,
+            allowEdit : true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 300,
+            targetHeight: 300,
+            saveToPhotoAlbum: true
+        });
+    }
+
+    function getImageSuccess(imageURI) 
+    {
+        varimageURI = imageURI;
+        var image = document.getElementById('myImageUrl');
+        image.src = imageURI;
+        alert("DONE");
+    }
+    
+    function saveImage() 
+    {
+        
+        var name = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for( var i=0; i < 12; i++ )
+        {
+            name += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+
+        var options = new FileUploadOptions();
+        options.fileKey = "file";
+        options.fileName = name;
+        options.mimeType = "image/jpeg";
+        
+        var params = new Object();
+        
+        params.value1 = "test";
+        params.value2 = "param";
+
+        options.params = params;
+        options.chunkedMode = false;
+
+        var ft = new FileTransfer();
+        
+        ft.upload
+        (
+            varimageURI, "http://apartrack.com/apartrack_movil/upload.php", function(result)
+            {
+                console.log(JSON.stringify(result));
+                alert(name);
+            }, 
+            function(error)
+            {
+                console.log(JSON.stringify(error));
+                alert(JSON.stringify(error));
+            }, 
+            options
+        );
+    }
+
 $("#preloader").delay(60).fadeOut("slow");
 
 

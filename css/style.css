@@ -577,3 +577,27 @@ footer img:hover { opacity: .83; }
 
 footer img:focus , footer a:focus { outline: none; }
 */
+
+
+
+
+.info-block
+{
+    border-right:5px solid #E6E6E6;margin-bottom:20px
+}
+.info-block .square-box
+{
+    width:110px;min-height:110px; height:100px; margin-right:10px;text-align:center!important;background-color:#009688;padding: 0px;
+}
+.info-block.block-info
+{
+    border-color: #009688;
+}
+.info-block.block-info .square-box
+{
+    background-color: #009688;
+    color:#FFF;
+}
+
+
+
