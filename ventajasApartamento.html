@@ -136,7 +136,7 @@
                             "<div class='form-group'>" +
                                 "<div class='checkbox'>" +
                                     "<label>" +
-                                        "<input type='checkbox' class='checkbox-ventajas' id='" + VENTAJAS[index].COD_VENTAJA_APARTAMENTO + "' name='" + VENTAJAS[index].COD_VENTAJA_APARTAMENTO + "'><span class='checkbox-material'><span class='check'></span></span> " + VENTAJAS[index].VENTAJA + "" +
+                                        "<input type='checkbox' class='checkbox-ventajas' id='" + VENTAJAS[index].COD_VENTAJA_APARTAMENTO + "' name='" + VENTAJAS[index].VENTAJA + "'><span class='checkbox-material'><span class='check'></span></span> " + VENTAJAS[index].VENTAJA + "" +
                                     "</label>" +
                                 "</div>" +
                             "</div>" ;
@@ -150,10 +150,9 @@
                     var ARRAY_VENTAJAS = []; 
                     $(".checkbox-ventajas").each(function() 
                     {                        
-                        ARRAY_VENTAJAS.push($(this).attr("id"));
+                        ARRAY_VENTAJAS.push({id:$(this).attr("id"), nombre:$(this).attr("name")});
                     });
                     localStorage.setItem("ventajas",JSON.stringify(ARRAY_VENTAJAS));
-                    //$(location).attr("href","imagenesApartamento.html");
                     $(location).attr("href","camera.html");
 
                 });

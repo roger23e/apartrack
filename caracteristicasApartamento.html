@@ -82,6 +82,8 @@
             var VENTAJAS                    = null;
             var VENTAJAS_APARTAMENTO        = null;
             var TIPO_NEGOCIACION            = null;
+            var ARRAY_CARACTERISTICAS       = null;          
+            
 
             function call_Ajax_Jsonp(URL, METODO, VALOR, LOADER, ERROR, FN) 
             {
@@ -134,7 +136,7 @@
                             "<div class='form-group'>" +
                                 "<div class='checkbox'>" +
                                     "<label>" +
-                                        "<input type='checkbox' class='checkbox-caracteristicas' id='" + CARACTERISTICAS[index].COD_CARACTERISTICA_APARTAMENTO + "' name='" + CARACTERISTICAS[index].COD_CARACTERISTICA_APARTAMENTO + "'><span class='checkbox-material'><span class='check'></span></span> " + CARACTERISTICAS[index].CARACTERISTICA + "" +
+                                        "<input type='checkbox' class='checkbox-caracteristicas' id='" + CARACTERISTICAS[index].COD_CARACTERISTICA_APARTAMENTO + "' name='" + CARACTERISTICAS[index].CARACTERISTICA + "'><span class='checkbox-material'><span class='check'></span></span> " + CARACTERISTICAS[index].CARACTERISTICA + "" +
                                     "</label>" +
                                 "</div>" +
                             "</div>" ;
@@ -147,7 +149,7 @@
                     var ARRAY_CARACTERISTICAS = []; 
                     $(".checkbox-caracteristicas:checked").each(function() 
                     {                        
-                        ARRAY_CARACTERISTICAS.push($(this).attr("id"));
+                        ARRAY_CARACTERISTICAS.push($(this).attr("id"), $(this).attr("nsme") );
                     });
                     console.log(ARRAY_CARACTERISTICAS);
                     
@@ -175,7 +177,7 @@
                     var ARRAY_CARACTERISTICAS = []; 
                     $(".checkbox-caracteristicas:checked").each(function() 
                     {     
-                        ARRAY_CARACTERISTICAS.push($(this).attr("id"));
+                        ARRAY_CARACTERISTICAS.push({id:$(this).attr("id"), nombre:$(this).attr("name")});
                     });
                     
                     localStorage.setItem("caracteristicas",JSON.stringify(ARRAY_CARACTERISTICAS));
