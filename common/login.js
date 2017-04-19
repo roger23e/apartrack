@@ -61,7 +61,7 @@ document.addEventListener("deviceready", function()
     document.addEventListener("backbutton", onBackKeyDown, false);
     
     var lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN);
-    var userProfile;
+    //var userProfile;
 
     $('#buttonRedes').click(function(e) 
     {
@@ -147,6 +147,7 @@ document.addEventListener("deviceready", function()
             {
                 if (DATA[0].RESULT === "000")
                 {
+                    localStorage.setItem("cliente_id",DATA[0].ID);
                     $(location).attr("href","bienvenida.html");
                 }
                 else
@@ -161,13 +162,7 @@ document.addEventListener("deviceready", function()
     {
         $(location).attr("href","registro.html");
     });
-    
-    /*
-    $("#buttonRedes").click(function()
-    {
-        $(location).attr("href","redes.html");
-    });
-    */
+
     $('#user').keydown(function() 
     {
         $("#error").delay(1000).fadeOut("slow");
@@ -210,6 +205,7 @@ $(document).ready(function()
                 else 
                 {
                   localStorage.setItem('userToken', token);
+                  localStorage.setItem("cliente_id",DATA[0].ID);
                  /* userProfile = profile;
                   $('.login-box').hide();
                   $('.logged-in-box').show();
@@ -241,6 +237,7 @@ $(document).ready(function()
             {
                 if (DATA[0].RESULT === "000")
                 {
+                    localStorage.setItem("cliente_id",DATA[0].ID);
                     $(location).attr("href","bienvenida.html");
                 }
                 else

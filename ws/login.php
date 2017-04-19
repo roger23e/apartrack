@@ -5,7 +5,7 @@
     $user       = $_GET['user'];
     $password   = $_GET['password'];
 
-    $sql= "SELECT count(*) as num_users FROM tbl_users WHERE user = :user AND password = :password;"; 
+    $sql= "SELECT count(*) as num_users, id FROM tbl_users WHERE user = :user AND password = :password;"; 
 	
     $stmt = $conn->prepare($sql); 
 
@@ -16,7 +16,8 @@
     
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 	
-    $num_users = $result['num_users'];
+    $num_users  = $result['num_users'];
+    $id         = $result['id'];
 
     if ($num_users == "0") 
     {
@@ -36,6 +37,7 @@
             'RESULT'    => "000",
             'MENSAJE'   => "USUARIO ENCONTRADO",
             'NUM_USERS'	=> $num_users,
+            'ID'	=> $id,
             'USER'      => $user,
             'PASSWORD'	=> $password 
         );
