@@ -45,6 +45,7 @@ document.addEventListener("deviceready", function()
     $("#preloader").delay(600).fadeOut("slow");
 });
 
+/*
 $(document).ready(function() 
 {
     $("#buttonVender").click(function()
@@ -59,3 +60,4 @@ $(document).ready(function()
     
     $("#preloader").delay(600).fadeOut("slow");
 });
+ */

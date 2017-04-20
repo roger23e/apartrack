@@ -61,7 +61,6 @@ document.addEventListener("deviceready", function()
     document.addEventListener("backbutton", onBackKeyDown, false);
     
     var lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN);
-    //var userProfile;
 
     $('#buttonRedes').click(function(e) 
     {
@@ -86,6 +85,7 @@ document.addEventListener("deviceready", function()
                 } 
                 else 
                 {
+                  localStorage.setItem('login_type', "redes");
                   localStorage.setItem('userToken', token);
                  /* userProfile = profile;
                   $('.login-box').hide();
@@ -148,6 +148,7 @@ document.addEventListener("deviceready", function()
                 if (DATA[0].RESULT === "000")
                 {
                     localStorage.setItem("cliente_id",DATA[0].ID);
+                    localStorage.setItem('login_type', "app");
                     $(location).attr("href","bienvenida.html");
                 }
                 else
@@ -176,11 +177,10 @@ document.addEventListener("deviceready", function()
     $("#preloader").delay(600).fadeOut("slow"); 
 });
 
+/*
 $(document).ready(function() 
 {
     var lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN);
-    //var userProfile;
-
     $('#buttonRedes').click(function(e) 
     {
         e.preventDefault();
@@ -206,12 +206,6 @@ $(document).ready(function()
                 {
                   localStorage.setItem('userToken', token);
                   localStorage.setItem("cliente_id",DATA[0].ID);
-                 /* userProfile = profile;
-                  $('.login-box').hide();
-                  $('.logged-in-box').show();
-                  $('.nickname').text(profile.nickname);
-                  $('.nickname').text(profile.name);
-                  $('.avatar').attr('src', profile.picture);*/
                   $(location).attr("href","bienvenida.html");
                 }
             }
@@ -267,3 +261,4 @@ $(document).ready(function()
 });
 
 
+*/

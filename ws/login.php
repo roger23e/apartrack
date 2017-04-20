@@ -42,24 +42,7 @@
             'PASSWORD'	=> $password 
         );
     }
-    
-    /*
-    $retorno = $sth->fetchAll();
-    foreach($retorno as $row) 
-    {
-        $parts[] = array
-        (
-            'idrequest'     => $row['idrequest'], 
-            'seg'           => $row['seg'], 
-            'part'          => $row['part'], 
-            'description'   => $row['description'], 
-            'quantity'      => $row['quantity'], 
-            'ord'           => $row['ord'],
-            'edit'          => $row['idrequest']."|".$row['part'], 
-            'delete'        => $row['idrequest']."|".$row['part']
-        );
-    }
-    */
+
 
     if(isset($_GET["callback"]))
     {	

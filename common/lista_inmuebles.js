@@ -70,10 +70,6 @@ function call_Ajax(FN)
     });
 }
 
-
-
-
-
 document.addEventListener("deviceready", function()
 {
     document.addEventListener("backbutton", onBackKeyDown, false);
@@ -248,7 +244,7 @@ $(function() {
         }).show();
     });
 });
-
+/*
 $(document).ready(function() 
 {    
     call_Ajax(function (data)
@@ -330,9 +326,7 @@ $(document).ready(function()
                         info_block.append(
                             square_box.append(
                                 image
-                            ),building, owner, phone, stars_container/*.append(
-                                stars, stars.clone(), stars.clone(), stars.clone(), stars.clone()
-                            )*/
+                            ),building, owner, phone, stars_container
                         )
                     )
                 )
@@ -351,15 +345,6 @@ $(document).ready(function()
             localStorage.setItem("inmueble_id",id);
             $(location).attr("href","informacionApartamento.html?id=" + id); 
         });
-        /*
-        if($('.wizard-card').bootstrapWizard('currentIndex') === "1")
-        {
-            localStorage.setItem("descripcion",$("#descripcion").val());
-            localStorage.setItem("precio",$("#precio").val());
-            localStorage.setItem("numero_habitaciones",$("#num_habitaciones").val());
-            localStorage.setItem("numero_banios",$("#num_banios").val());
-        };
-        */
     });
  
     $("#buttonRegresar").click(function()
@@ -367,5 +352,5 @@ $(document).ready(function()
         $(location).attr("href","bienvenida.html");
     }); 
 });
-
+*/
 

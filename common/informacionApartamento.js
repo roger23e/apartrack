@@ -29,6 +29,9 @@ document.addEventListener("deviceready", function()
     });  
 });
 
+
+
+/*
 $(document).ready(function() 
 {    
     $("#buttonContinuar").click(function(e)
@@ -48,4 +51,4 @@ $(document).ready(function()
     });  
 });
 
-
+*/

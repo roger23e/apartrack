@@ -12,8 +12,6 @@
     $stmt->bindParam(':user',        $user,     PDO::PARAM_STR);
     $stmt->bindParam(':password',    $password, PDO::PARAM_STR);
 
-    $stmt->execute();
-
     if ($stmt->execute()) 
     {
         $return[] = array

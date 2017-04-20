@@ -56,6 +56,8 @@ document.addEventListener("deviceready", function()
     
 });
 
+
+/*
 $(document).ready(function() 
 {
     $("#preloader").delay(600).fadeOut("slow");
@@ -66,4 +68,4 @@ $(document).ready(function()
     });
 });
 
-
+*/

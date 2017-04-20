@@ -26,24 +26,15 @@ function alertDismissed()
     $(location).attr("href","bienvenida.html");
 }
 
-function call_Ajax(INMUEBLE_ID, CLIENTE_ID, NAME, DESCRIPTION, ROOM_NUMBER, BATH_NUMBER, PRICE, IMAGES, CHARACTERISTICS, ADVANTAGES, FN) 
+function call_Ajax(CLIENTE_ID, FN) 
 {
     $.ajax
     ({
         type: "GET",
-        url: WS_URL + "finalizar.php",
+        url: WS_URL + "ver.php",
         data:
         {
-            inmueble_id:INMUEBLE_ID,
             cliente_id:CLIENTE_ID,
-            name:NAME,
-            description:DESCRIPTION,
-            room_number:ROOM_NUMBER,
-            bath_number:BATH_NUMBER,
-            price:PRICE,
-            images:IMAGES,
-            characteristics:CHARACTERISTICS,
-            advantages:ADVANTAGES
         },
         dataType: "jsonp",
         jsonp: "callback",
@@ -79,11 +70,32 @@ function call_Ajax(INMUEBLE_ID, CLIENTE_ID, NAME, DESCRIPTION, ROOM_NUMBER, BATH
 
 function onBackKeyDown(e) 
 {
-    $(location).attr("href","camera.html");
+    $(location).attr("href","bienvenida.html");
 }
 
 document.addEventListener("deviceready", function()
 {
+    CLIENTE_ID = localStorage.getItem("cliente_id");
+    call_Ajax(CLIENTE_ID, function(data) 
+    {
+
+        DATA = data;
+        console.log(DATA);            
+        /*if(DATA[0].RESULTADO ==="0000")
+        {
+            navigator.notification.alert
+            (
+                '!PUBLICACION INSERTADA EXITOSAMENTE¡', 
+                alertDismissed,
+                'INFORMACION',
+                'CONTINUAR'
+            );
+        }*/
+    });  
+    
+    
+    
+    
     $("#nombre_inmueble").text(localStorage.getItem("inmueble"));
     $("#description").val(localStorage.getItem("descripcion"));
     $("#room-number").val(localStorage.getItem("numero_habitaciones"));
@@ -103,17 +115,8 @@ document.addEventListener("deviceready", function()
     {
         if (index === 0)
         {
-            img =   '<div class="item active">' +
-                    '<img style="width:752px; height:376px;" src="' + "http://apartrack.com/apartrack_movil/upload/" + IMAGES_JSON[index]+ ".jpg" + '" alt="Awesome Image">' +
-                '</div>';
-        $("#carousel-content").append(img);
-        }
-        else
-        {
-            img =   '<div class="item">' +
-                    '<img style="width:752px; height:376px;" src="' + "http://apartrack.com/apartrack_movil/upload/" + IMAGES_JSON[index]+ ".jpg" + '" alt="Awesome Image">' +
-                    '</div>';
-            $("#carousel-content").append(img);           
+            img =   '<img style="max-width:752px; max-height:356px;" src="' + "http://apartrack.com/apartrack_movil/upload/" + IMAGES_JSON[index]+ ".jpg" + '" alt="Awesome Image">';
+        $("#image").append(img);
         }
     });
 
@@ -127,39 +130,11 @@ document.addEventListener("deviceready", function()
         $("#advantages").append('<li class="col-md-12" style="text-align: left;"><i class="material-icons text-success">check</i>'+ ADVANTAGES_JSON[index].nombre +'</li>'); 
     });
 
-    $("#buttonPublicar").click(function()
-    {
-        INMUEBLE_ID             = localStorage.getItem("inmueble_id");
-        CLIENTE_ID              = localStorage.getItem("cliente_id");
-        NAME                    = $("#nombre_inmueble").text();
-        DESCRIPTION             = $("#description").val();
-        ROOM_NUMBER             = $("#room-number").val();
-        BATH_NUMBER             = $("#bath-number").val();
-        PRICE                   = $("#price").val();
-        IMAGES                  = IMAGES_STR;
-        CHARACTERISTICS         = CHARACTERISTICS_STR;
-        ADVANTAGES              = ADVANTAGES_STR;
 
-        call_Ajax(INMUEBLE_ID, CLIENTE_ID, NAME, DESCRIPTION, ROOM_NUMBER, BATH_NUMBER, PRICE, IMAGES, CHARACTERISTICS, ADVANTAGES, function(data) 
-        {
-            DATA = data;
-            console.log(DATA);            
-            if(DATA[0].RESULTADO ==="0000")
-            {
-                navigator.notification.alert
-                (
-                    '!PUBLICACION INSERTADA EXITOSAMENTE¡', 
-                    alertDismissed,
-                    'INFORMACION',
-                    'CONTINUAR'
-                );
-            }
-        });          
-    });
     
     $("#buttonRegresar").click(function()
     {
-        $(location).attr("href","camera.html");
+        $(location).attr("href","bienvenida.html");
     });
     
     $("#preloader").delay(600).fadeOut("slow");

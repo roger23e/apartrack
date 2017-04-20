@@ -105,7 +105,7 @@ $(function() {
         }).show();
     });
 });
-
+/*
 $(document).ready(function() 
 {    
     call_Ajax(function (data)
@@ -192,9 +192,7 @@ $(document).ready(function()
                         info_block.append(
                             square_box.append(
                                 image
-                            ),building, owner, phone, stars_container/*.append(
-                                stars, stars.clone(), stars.clone(), stars.clone(), stars.clone()
-                            )*/
+                            ),building, owner, phone, stars_container
                         )
                     )
                 )
@@ -229,4 +227,4 @@ $(document).ready(function()
     }); 
 });
 
-
+*/

@@ -56,7 +56,7 @@
             sourceType: navigator.camera.PictureSourceType.CAMERA,
             allowEdit : true,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 572,
+            targetWidth: 752,
             targetHeight: 376,
             saveToPhotoAlbum: true
         });
@@ -129,6 +129,7 @@ document.addEventListener("deviceready", function()
     });  
 });
 
+/*
 $(document).ready(function() 
 {    
     $("#preloader").delay(60).fadeOut("slow");
@@ -140,7 +141,7 @@ $(document).ready(function()
     }); 
 });
 
-
+*/
 
 
 /*

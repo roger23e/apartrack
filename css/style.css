@@ -89,10 +89,10 @@ form {
 	left:50%;
 	top:50%;
 	padding-bottom:40px;
-	background-image:url(../img/page-loader.gif);
-	background-size:64px 64px;
+	/* background-image:url(../img/page-loader.gif); */
+	/*background-size:64px 64px;
 	background-repeat:no-repeat;
-	background-position:center bottom;
+	background-position:center bottom;*/
 	margin:-125px 0 0 -125px;
 }
 
